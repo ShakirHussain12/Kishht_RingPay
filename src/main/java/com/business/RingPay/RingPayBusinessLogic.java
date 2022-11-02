@@ -248,7 +248,7 @@ public class RingPayBusinessLogic extends Utilities {
 		clearField(RingLoginPage.objOtpTxtField1, "Enter OTP");
 		Aclick(RingLoginPage.objOtpTxtField1, "Otp text field");
 		type(RingLoginPage.objOtpTxtField1, lessOtp, "Enter OTP");
-		Boolean Otp_flag = verifyElementNotPresent(RingLoginPage.OtpError, 10);
+		boolean Otp_flag = verifyElementNotPresent(RingLoginPage.OtpError, 10);
 		softAssertion.assertEquals(false, Otp_flag);
 		extent.extentLoggerPass("TC_Ring_Core_26",
 				"TC_Ring_Core_26 - To Verify if user enters less than 6 digit number");
