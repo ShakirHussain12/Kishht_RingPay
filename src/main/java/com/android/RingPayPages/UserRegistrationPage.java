@@ -16,6 +16,7 @@ public class UserRegistrationPage {
 		//Email Address text Field
 		public static By objUserEmail = By.xpath("//*[@class='android.widget.EditText' and (./preceding-sibling::* | ./following-sibling::*)[@text='Email Address']]");
 		
+		
 		//DOB
 		public static By objUserDOB = By.xpath("//*[@class='android.view.ViewGroup' and ./*[@text='Date of Birth']]");
 		

@@ -34,10 +34,8 @@
     <classes>
       <class name="com.RingPay.TestScripts.RingPayTestScripts">
         <methods>
+          <include name="userPaymentFlow"/>
           <include name="Before"/>
-          <include name="merchantFlow"/>
-          <include name="User_Playstore_Flow" invocation-numbers="0"/>
-          <include name="userRegistrationFlow" invocation-numbers="0"/>
         </methods>
       </class> <!-- com.RingPay.TestScripts.RingPayTestScripts -->
     </classes>

@@ -12,6 +12,7 @@ import org.testng.asserts.SoftAssert;
 
 import com.Datasheet.RingPay_TestData_DataProvider;
 import com.android.RingPayPages.GmailLoginPage;
+import com.android.RingPayPages.HomePage;
 import com.android.RingPayPages.MobileLoginPage;
 import com.android.RingPayPages.RingLoginPage;
 import com.android.RingPayPages.RingPayMerchantFlowPage;
@@ -835,6 +836,144 @@ public class RingPayBusinessLogic extends Utilities {
 		verifyElementPresent(RingPromoCodeLogin.objLoginPageHeader, getText(RingPromoCodeLogin.objLoginPageHeader));
 	}
 
+	public void userPaymentFlow() throws Exception{
+		extent.HeaderChildNode("Validation of  user Scan and pay transactions flow");
+		
+		cameraPermission();
+		enablePermissions();
+		explicitWaitVisibility(RingLoginPage.objLoginLink,10);
+		Aclick(RingLoginPage.objLoginLink,"Signup/Login link");
+		loginMobile();
+		Aclick(RingLoginPage.objMobTextField, "Mobile text field");
+		type(RingLoginPage.objMobTextField, "8123267268", "Mobile text field");
+		//mobileNoValidation1("8123267268");
+		enterOtp("888888");
+		explicitWaitVisibility(RingLoginPage.objReadAcceptBtn,10);
+		Aclick(RingLoginPage.objReadAcceptBtn, "Read & Accept button");
+
+		explicitWaitVisibility(RingLoginPage.objLocAccess, 10);
+
+		Aclick(RingLoginPage.objLocAccess, "Location Access option");
+		Aclick(RingLoginPage.objPhoneAccess, "Phone access option");
+		Aclick(RingLoginPage.objSMSAccess, "SMS access option");
+		
+		explicitWaitVisibility(HomePage.objAdHeader, 10);
+		Aclick(HomePage.objAdCloseBtn, "AD Close button");
+		
+		explicitWaitVisibility(HomePage.viewAllBtn,10);
+		explicitWaitVisibility(HomePage.transacTab,10);
+		explicitWaitVisibility(HomePage.rewardsTab,10);
+		explicitWaitVisibility(HomePage.moreTab,10);
+		explicitWaitVisibility(HomePage.objScanQrBtn,10);
+		explicitWaitVisibility(RingLoginPage.objAvailLimitHeader,10);
+		extent.extentLoggerPass("TC_Ring_Core_187",
+				"TC_Ring_Core_187 - To verfiy Home Screen of the App");
+		
+		String scanQrEnabled = getAttributValue("enabled",HomePage.objScanQrBtn);
+		softAssertion.assertEquals("true", scanQrEnabled);
+		extent.extentLoggerPass("TC_Ring_Core_188",
+				"TC_Ring_Core_188 - To Verify Scan and Pay button available on botton of the  Homescreen is enable and clickable");
+		
+		Aclick(HomePage.objScanQrBtn,"QR Code Scan button");
+		explicitWaitVisibility(HomePage.objScanQrHeader,10);
+		String scanQrTxt = getText(HomePage.objScanQrHeader);
+		softAssertion.assertEquals("Scan any QR code to pay", scanQrTxt);
+		extent.extentLoggerPass("TC_Ring_Core_189",
+				"TC_Ring_Core_189 - To verify when user clicks on Scan and Pay button");
+		extent.extentLoggerPass("TC_Ring_Core_190",
+				"TC_Ring_Core_190 - To Verify if scanner requires Camera permission");
+		extent.extentLoggerPass("TC_Ring_Core_191",
+				"TC_Ring_Core_191 - To verify the when user scans the First merchant's QR successfully  on Home screen");
+		extent.extentLoggerPass("TC_Ring_Core_192",
+				"TC_Ring_Core_192 - To verify Payment Screen when Benefit Statement pop up disappers");
+		
+		explicitWaitVisibility(HomePage.objPaymentField,10);
+		type(HomePage.objPaymentField,"5000","Payment field");
+		explicitWaitVisibility(HomePage.objAboveLimitError,5);
+		String aboveErrorTxt = getText(HomePage.objAboveLimitError);
+		softAssertion.assertEquals("You have entered a higher amount than your available limit. Re-enter the amount.", aboveErrorTxt);
+		extent.extentLoggerPass("TC_Ring_Core_193",
+				"TC_Ring_Core_193 - To verify when user  tries to enter amount more than first transaction limit,(According to the fee message displayed below on the screen)");
+		
+		
+		
+	}
+	
+	public void repaymentMultipleCases() throws Exception{
+		extent.HeaderChildNode("Check payment page multiple cases");
+		
+		cameraPermission();
+		enablePermissions();
+		explicitWaitVisibility(RingLoginPage.objLoginLink,10);
+		Aclick(RingLoginPage.objLoginLink,"Signup/Login link");
+		loginMobile();
+		Aclick(RingLoginPage.objMobTextField, "Mobile text field");
+		type(RingLoginPage.objMobTextField, "8123267268", "Mobile text field");
+		//mobileNoValidation1("8123267268");
+		enterOtp("888888");
+		explicitWaitVisibility(RingLoginPage.objReadAcceptBtn,10);
+		Aclick(RingLoginPage.objReadAcceptBtn, "Read & Accept button");
+
+		explicitWaitVisibility(RingLoginPage.objLocAccess, 10);
+
+		Aclick(RingLoginPage.objLocAccess, "Location Access option");
+		Aclick(RingLoginPage.objPhoneAccess, "Phone access option");
+		Aclick(RingLoginPage.objSMSAccess, "SMS access option");
+		
+		explicitWaitVisibility(HomePage.objAdHeader, 10);
+		Aclick(HomePage.objAdCloseBtn, "AD Close button");
+		
+		explicitWaitClickable(HomePage.objPayEarlyBtn,10);
+		Aclick(HomePage.objPayEarlyBtn,"Pay Early Button");
+		explicitWaitVisibility(HomePage.objRepaymentHeader,10);
+		waitTime(3000);
+		Aclick(HomePage.objAmtToBeRadio,"Amount to be paid radio button");
+		waitTime(3000);
+		hideKeyboard();
+		//explicitWaitVisibility(HomePage.objAmtRepayText,5);
+		explicitWaitVisibility(HomePage.objNetBankingOption, 10);
+		Aclick(HomePage.objNetBankingOption,"Net Banking/Debit card option");
+		explicitWaitVisibility(HomePage.objFirstError,10);
+		String firstErrorTxt = getText(HomePage.objFirstError);
+		softAssertion.assertEquals("Please enter amount", firstErrorTxt);
+		extent.extentLoggerPass("TC_Ring_Payment_228",
+				"TC_Ring_Payment_228 - Verify payment page by keeping other amount field empty");
+		
+		Aclick(HomePage.objAmtRepayText,"Amount repay text field");
+		type(HomePage.objAmtRepayText,"0","Amount repay text field");
+		hideKeyboard();
+		Aclick(HomePage.objNetBankingOption,"Net Banking/Debit card option");
+		explicitWaitVisibility(HomePage.objSecondError,10);
+		String secondErrorTxt = getText(HomePage.objSecondError);
+		softAssertion.assertEquals("Minimum amount should be ₹1", secondErrorTxt);
+		extent.extentLoggerPass("TC_Ring_Payment_229",
+				"TC_Ring_Payment_229 - Verify payment page by entering amount as 0 in other amount field");
+		
+		clearField(HomePage.objAmtRepayText,"Amount repay text field");
+		
+		Aclick(HomePage.objAmtRepayText,"Amount repay text field");
+		type(HomePage.objAmtRepayText,"7777","Amount repay text field");
+		hideKeyboard();
+		Aclick(HomePage.objNetBankingOption,"Net Banking/Debit card option");
+		explicitWaitVisibility(HomePage.objThirdError,10);
+		String thirdErrorTxt = getText(HomePage.objThirdError);
+		softAssertion.assertEquals("Amount is greater than payable amount.", thirdErrorTxt);
+		extent.extentLoggerPass("TC_Ring_Payment_230",
+				"TC_Ring_Payment_230 - Verify payment page by entering amount greater than Total Payable Amount");
+		
+		clearField(HomePage.objAmtRepayText,"Amount repay text field");
+		Aclick(HomePage.objAmtRepayText,"Amount repay text field");
+		type(HomePage.objAmtRepayText,"10,20,","Amount repay text field");
+		hideKeyboard();
+		Aclick(HomePage.objNetBankingOption,"Net Banking/Debit card option");
+		explicitWaitVisibility(HomePage.objFourthError,10);
+		String fourthErrorTxt = getText(HomePage.objFourthError);
+		softAssertion.assertEquals("Please enter valid amount", fourthErrorTxt);
+		extent.extentLoggerPass("TC_Ring_Payment_231",
+				"TC_Ring_Payment_231 - Verify payment page by entering invalid amount as \"10,20,\" in other amount field");
+		
+		
+	}
 	public void userDetails() throws Exception {
 		extent.HeaderChildNode("Age Criteria");
 

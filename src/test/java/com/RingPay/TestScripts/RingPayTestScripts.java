@@ -29,7 +29,7 @@ public class RingPayTestScripts {
 	}*/
 	
 	
-	@Test(priority = 0)
+	/*@Test(priority = 0)
 	@Parameters({"Valid_MobileNumber","EditValid_MobileNumber","LessThanTenDigits_MobileNumber","MoreThanTenDigits_MobileNumber","SpecialCharacters_MobileNumber","Space_MobileNumber","LessThanSixDigitOTP","InvalidOTP"})
     public void  User_Playstore_Flow(String validMob, String editMob, String lessThanTenMob, String moreThanTenMob,String specialCharMob, String spaceMob,String lessOtp, String invalidOtp) throws Exception {
 		ringPayBusiness.User_Play_Store_Flow(validMob,editMob,lessThanTenMob,moreThanTenMob,specialCharMob,spaceMob,lessOtp,invalidOtp);
@@ -47,6 +47,11 @@ public class RingPayTestScripts {
 	@Test(priority=2)
 	public void merchantFlow() throws Exception{
 		ringPayBusiness.merchantFlow();
+	}*/
+	
+	@Test(priority=1)
+	public void userPaymentFlow() throws Exception{
+		ringPayBusiness.repaymentMultipleCases();
 	}
 	
 	/*@Test(priority = 1)
