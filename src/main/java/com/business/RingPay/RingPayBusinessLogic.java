@@ -909,7 +909,6 @@ public class RingPayBusinessLogic extends Utilities {
 		loginMobile();
 		Aclick(RingLoginPage.objMobTextField, "Mobile text field");
 		type(RingLoginPage.objMobTextField, "8123267268", "Mobile text field");
-		//mobileNoValidation1("8123267268");
 		enterOtp("888888");
 		explicitWaitVisibility(RingLoginPage.objReadAcceptBtn,10);
 		Aclick(RingLoginPage.objReadAcceptBtn, "Read & Accept button");
@@ -971,6 +970,50 @@ public class RingPayBusinessLogic extends Utilities {
 		softAssertion.assertEquals("Please enter valid amount", fourthErrorTxt);
 		extent.extentLoggerPass("TC_Ring_Payment_231",
 				"TC_Ring_Payment_231 - Verify payment page by entering invalid amount as \"10,20,\" in other amount field");
+		
+		clearField(HomePage.objAmtRepayText,"Amount repay text field");
+		Aclick(HomePage.objAmtRepayText,"Amount repay text field");
+		type(HomePage.objAmtRepayText,"17","Amount repay text field");
+		hideKeyboard();
+		Aclick(HomePage.objNetBankingOption,"Net Banking/Debit card option");
+		waitTime(3000);
+		Aclick(HomePage.objNetBankingOption,"Net Banking/Debit card option");
+		explicitWaitVisibility(HomePage.objNetbanking,10);
+		Aclick(HomePage.objNetbanking,"Netbanking");
+		explicitWaitVisibility(HomePage.objSelectBankHeader,10);
+		Aclick(HomePage.objSBIBank,"SBI bank");
+		Aclick(HomePage.objPayNowBtn,"Pay Now Button");
+		explicitWaitVisibility(HomePage.objPayFail,10);
+		extent.extentLoggerPass("TC_Ring_Payment_232",
+				"TC_Ring_Payment_232 - Verify payment page by entering amount less than 20rs if Partner is RAZORPAY or PAYNIMO");
+		Aclick(HomePage.objTryAgain,"Try Again button");
+		for(int i =0;i<=2;i++) {
+			Back(i);
+		}
+		
+		
+		explicitWaitVisibility(HomePage.objRepaymentHeader,10);
+		Aclick(HomePage.objAmtRepayText,"Amount to be paid text field");
+		clearField(HomePage.objAmtRepayText,"Amount to be paid text field");
+		type(HomePage.objAmtRepayText,"20","Amount to be paid text field");
+		hideKeyboard();
+		Aclick(HomePage.objNetBankingOption,"Net Banking/Debit card option");
+		waitTime(3000);
+		Aclick(HomePage.objNetBankingOption,"Net Banking/Debit card option");
+		explicitWaitVisibility(HomePage.objNetbanking,10);
+		extent.extentLoggerPass("TC_Ring_Payment_233",
+				"TC_Ring_Payment_233 - Verify payment page by entering amount equal to 20rs");
+		Aclick(HomePage.objNetbanking,"Netbanking");
+		explicitWaitVisibility(HomePage.objSelectBankHeader,10);
+		Aclick(HomePage.objSBIBank,"SBI bank");
+		Aclick(HomePage.objPayNowBtn,"Pay Now Button");
+		explicitWaitVisibility(HomePage.objSuccessBtn,10);
+		Aclick(HomePage.objSuccessBtn,"Success Button");
+		explicitWaitVisibility(HomePage.objRepaySuccess,10);
+		Aclick(HomePage.objHomePage,"Go to homepage button");
+		explicitWaitVisibility(RingLoginPage.objAvailLimitHeader,10);
+		extent.extentLoggerPass("TC_Ring_Payment_234",
+				"TC_Ring_Payment_234 - To Verify user clicks on View Details on Payment screen");
 		
 		
 	}
