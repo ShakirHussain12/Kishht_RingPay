@@ -63,4 +63,35 @@ public class HomePage {
 
 		//Valid amt error
 		public static By objFourthError = By.xpath("//*[@text='Please enter valid amount']");
+		
+		//Netbanking option
+		public static By objNetbanking = By.xpath("//*[@text='Netbanking All Indian banks']");
+		
+		//Select bank page
+		public static By objSelectBankHeader = By.xpath("//*[@text='Select Bank']");
+		
+		//SBI bank
+		public static By objSBIBank = By.xpath("//*[@class='android.view.View' and ./*[@text='SBI']]");
+		
+		//Pay now button
+		public static By objPayNowBtn = By.xpath("//*[@text='Pay Now']");
+		
+		//Payment failed header
+		public static By objPayFail = By.xpath("//*[@text='Payment failed']");
+		
+		//Try again btn
+		public static By objTryAgain = By.xpath("//*[@text='Try Again']");
+		
+		//Cross button repayment
+		public static By objCrossBtn = By.xpath("//*[@class='android.widget.Button' and ./parent::*[@id='header-wrapper']]");
+
+		//Success button
+		public static By objSuccessBtn = By.xpath("//*[@text='Success']");
+		
+		//Repayment success page
+		public static By objRepaySuccess = By.xpath("//*[@text='Your payment was successful']");
+		
+		//Go to homepage button
+		public static By objHomePage = By.xpath("//*[@text='Go to Homepage']");
+		
 }
